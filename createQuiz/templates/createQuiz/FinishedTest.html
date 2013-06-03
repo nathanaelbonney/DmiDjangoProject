@@ -1,0 +1,44 @@
+{% load staticfiles %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'createQuiz/UXsheet.css' %}" />
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Quiz Master</title>
+</head>
+
+<body>
+
+	<div class="mainMenu">
+	
+		<div class="title"><h1>Quiz Master!</h1></div>
+		
+	</div>
+
+	<div class="container">
+		<h2>{{quiz.name}}</h2>
+		
+		{% for question in quiz.question_set.all %}
+	    	<div class='questionBox' name='questionBox{{ question.id }}' id='questionBox{{ question.id }}'>
+				<div class='row'>
+					<span class='left'>Question {{ question.id}}</span>
+				</div>
+				
+				<div class="displayAnswer">{{ question.text }}</div>
+				
+				<div class='answers' id='answers{{ question.id }}'>
+				
+				{% for choice in question.create_set.all %}
+					{{ choice.answer}} <input type="radio" name='q{{ question.id }}' id='q{{ question.id }}'> 
+				{% endfor %}
+				</div>
+			</div>
+			
+		{% endfor %}
+		
+	</div>
+
+</body>
+
+</html>

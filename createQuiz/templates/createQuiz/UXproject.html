@@ -1,0 +1,104 @@
+{% load staticfiles %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript">
+	var letArray = ["A", "B", "C", "D", "E", "F", "G", "H"];
+	var questionNum = 1;
+	
+	$(document).ready(function() {
+		$("#select1").change(function(){
+			getNumAnswers("1");
+		});
+		$("#addButton").click(function(){
+			addQuestion(questionNum);
+		});
+	});
+	
+	function getNumAnswers(questionNumber){
+		var numAnswers = $( "#select" + questionNumber + ' :selected').val();
+		var answer = "#answers" + questionNumber;
+		var correct = "#correct" + questionNumber;
+		var answersHTML = "";
+		var correctHTML = "";
+		for (var i = 1; i - 1 < numAnswers; i++){
+				answersHTML += letArray[i - 1] + ": <input type='text' name='q" + questionNumber +"a" + i +"' id='q" + questionNumber +"a" + i +"'>";
+				correctHTML += "<option value='" + i +"'>" + letArray[i - 1] + "</option>";
+		}
+		$(answer).html(answersHTML);
+		$(correct).html(correctHTML);
+		}
+	
+	function addQuestion(){
+		questionNum += 1;
+		var num = questionNum;
+		$(".questions").append("<div class='questionBox' name='questionBox" + num + "' id='questionBox" + num + "'><div class='row'><span class='left'>Question " + num + "</span></div><textarea class='txtArea' name='questionText" + num + "' rows='8' cols='120'></textarea><div class='row'><div class='center'>Correct Answer: <select name='correct" + num + "' id='correct" + num + "'><option value='1' selected='selected'>A</option><option value='2'>B</option><option value='3'>C</option><option value='4'>D</option></select>Number of Answers: <select name='select" + num + "' id='select" + num + "' class='numDropdown'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4' selected='selected'>4</option><option value='5'>5</option></select>Points: <input type='text' name='points" + num + "' class='pointsInput'></div></div><div class='answers' name='answers" + num + "' id='answers" + num + "'>A: <input type='text' name='q" + num + "a1' id='q" + num + "A1'> B: <input type='text' name='q" + num + "a2' id='q" + num + "a2'> C: <input type='text' name='q" + num + "a3' id='q" + num + "a3'> D: <input type='text' name='q" + num + "a4' id='q" + num + "a4'></div></div>");
+		var selectBox = "#select" + num
+		$(selectBox).change(function(){
+			getNumAnswers(num);
+		});		
+		
+		$("#numQuestions").val(questionNum);
+	}
+		
+// 		$("#image").
+	
+	</script>
+	<link rel="stylesheet" type="text/css" href="{% static 'createQuiz/UXsheet.css' %}" />
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Quiz Master</title>
+</head>
+
+<body>
+
+	<div class="mainMenu">
+	
+		<div class="title"><h1>Quiz Master!</h1></div>
+		
+	</div>
+
+	<div class="container">
+		
+		<div class="progressBar">
+			Start -> Add Questions -> Finish
+		</div>
+		
+		<form action="/create/submitquiz/" method="post">
+		{% csrf_token %}
+		<div class = "questions">
+		<input type="hidden" id="numQuestions" name="numQuestions" value="1"/>
+		<p>Name: <input type="text" name="quizName"/></p>
+		<div class="questionBox" id="questionBox1">
+		
+			<div class="row">
+				<span class="left">Question 1</span>
+			</div>
+			
+			<textarea class="txtArea" name="questionText1" rows="8" cols="120"></textarea>
+			
+			<div class="row">
+				<div class="center">Correct Answer: <select name="correct1" id="correct1"><option value="1" selected="selected">A</option><option value="2">B</option><option value="3">C</option><option value="4">D</option></select>
+				Number of Answers: <select name="select1" id="select1" class="numDropdown"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4" selected="selected">4</option><option value="5">5</option></select>
+				Points: <input type="text" name="points1" class="pointsInput"></div>
+			</div>
+			
+			<div class="answers" id="answers1">
+				A: <input type="text" name="q1a1" id="q1a1"> B: <input type="text" name="q1a2" id="q1a2"> C: <input type="text" name="q1a3" id="q1a3"> D: <input type="text" name="q1a4" id="q1a4">
+			</div>
+			
+		</div>
+		
+		</div>
+		
+		<div class="buttonBar" style="text-align:center;">
+			<input type="button" value="Add Question" id="addButton"><input type="button" value="Save" id="saveButton" class="centerButton"><input type="submit" value="Submit Quiz" id="finishButton">
+		</div>
+		</form>
+
+	</div>
+
+</body>
+
+</html>

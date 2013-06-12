@@ -5,19 +5,25 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="{% static 'createQuiz/UXsheet.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'createQuiz/displayResults.css' %}" />
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Quiz Master</title>
 </head>
 
 <body>
 
-{% include "createQuiz/titleMenu.html" %}
+	<div class="mainMenu">
+	
+		<div class="title"><h1>Quiz Master!</h1></div>
+		
+	</div>
 
 	<div class="container">
 		<h2>{{quiz.name}}</h2>
+		<p> You got {{pointsEarned}} out of {{pointsTotal}} points, {{percentageCorrect}}.</p>
 		<form action="/create/gradeQuiz/{{quiz.id}}" method="post">
 		{% csrf_token %}
-		{% for question in quiz.question_set.all %}
+		{% for question, answer in questionAnswers %}
 	    	<div class='questionBox' name='questionBox{{ forloop.counter }}' id='questionBox{{ forloop.counter }}'>
 				<div class='row'>
 					<span class='left'>Question {{ forloop.counter }}</span>
@@ -28,7 +34,7 @@
 				<div class='answers' id='answers{{ forloop.counter }}'>
 				
 				{% for choice in question.choice_set.all %}
-					{{ forloop.counter|numtoupper }}: {{ choice.answer}} <input type="radio" name='q{{ forloop.parentloop.counter }}' id='q{{ forloop.parentloop.counter }}' value='{{ choice.answer}}'> 
+					<span {% if choice.is_correct %}class = "correctAnswer"{% elif answer == choice.answer %} class="incorrectAnswer" {% else %} class="answer" {% endif %}>{{ forloop.counter|numtoupper }}: {{ choice.answer}}</span>
 				{% endfor %}
 				</div>
 			</div>

@@ -1,0 +1,19 @@
+p{
+	margin: 10px;
+	text-align: center;
+}
+
+.answer{
+	color: rgb(35, 35, 35);
+	margin: 5px;
+}
+
+.correctAnswer{
+	font-weight: bold;
+	margin: 5px;
+}
+
+.incorrectAnswer{
+	color: red;
+	margin: 5px;
+}

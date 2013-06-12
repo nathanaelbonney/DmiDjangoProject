@@ -1,0 +1,41 @@
+{% load staticfiles %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'createQuiz/UXsheet.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'createQuiz/displayResults.css' %}" />
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Quiz Master</title>
+</head>
+
+<body>
+
+{% include "createQuiz/titleMenu.html" %}
+
+	<div class="container">
+		<h2>{{user.username}}</h2>
+		{% if quizlist %}
+			<p>Here are all the quizes you have created.</p>
+			
+			<table border="1">
+			<tr>
+			<th>Quiz Number</th>
+			<th>Quiz Link</th>
+			<th>Times Taken</th>
+			<th>Date Created</th>
+			</tr>
+			{% for quiz in quizlist %}
+				<tr><td>{{ forloop.counter }} </td><td><a href="/create/takeQuiz/{{quiz.id}}">{{quiz.name}}</a></td><td> {{quiz.takers|length}} </td><td>{{quiz.pub_date}}</td><tr>
+			{% endfor %}
+			
+			</table>
+		
+		{% else	%}
+		<p>Sorry, you haven't made a quiz yet! <a href="/create/">Create one here</a>.
+		{% endif %}
+	</div>
+
+</body>
+
+</html>

@@ -7,12 +7,27 @@ html{
 	font-size: 14pt;
 }
 
-.title{
+h1{
+	text-align: center;
+	margin: 0px;
+}
+
+h2{
+	text-align: center;
+}
+
+table{
+	text-align: center;
+	margin: auto;	
+}
+
+.mainMenu{
 	width: 95%;
 	display: block;
 	margin: auto;
-	text-align: center;
+	margin-bottom: 20px;
 	box-shadow: 0px 0px 10px silver;
+/* 	min-height: 70px; */
 	
 	background: #fefcea; /* Old browsers */
 	background: -moz-linear-gradient(top,  #fefcea 0%, #f1da36 100%); /* FF3.6+ */
@@ -28,6 +43,7 @@ html{
 .container{
 	width: 95%;
 	display: block;
+	clear: both;
 	margin: auto;
 	min-height: 35em;
 	box-shadow: 0px 0px 10px silver;
@@ -128,5 +144,12 @@ html{
 	margin-right: 5%;
 	width: auto;
 	background-color: rgba(0, 0, 0, 0.2);
-	
+}
+
+.loginBar{
+	text-align: right;
+/* 	clear: both; */
+/* 	float: right; */
+/* 	background-image: url("honey_im_subtle.png"); */
+/* 	background-repeat: repeat; */
 }

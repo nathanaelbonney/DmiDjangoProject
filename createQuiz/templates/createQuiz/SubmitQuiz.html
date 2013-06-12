@@ -1,0 +1,35 @@
+{% load staticfiles %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'createQuiz/UXsheet.css' %}" />
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Quiz Master</title>
+</head>
+
+<body>
+
+	<div class="mainMenu">
+	
+		<div class="title"><h1>Quiz Master!</h1></div>
+		
+	</div>
+
+	<div class="container">
+		
+		<div class="progressBar">
+			Start -> Add Questions -> Finish
+		</div>
+		
+		<div class = "questions">
+		<p>Thanks you for making a quiz! Send the following link to recipients to allow them to take the quiz.</p>
+		
+		<a href="{{quizURL}}">{{quizURL}}</a>
+		</div>
+		
+	</div>
+
+</body>
+
+</html>

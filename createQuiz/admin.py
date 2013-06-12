@@ -12,8 +12,7 @@ class QuizAdmin(admin.ModelAdmin):
     fieldsets = [
         (None,               {'fields': ['name']}),
         ('Date information', {'fields': ['pub_date'], 'classes': ['collapse']}),
-        ('Author',               {'fields': ['author']}),
-        ('Number of Times Taken',               {'fields': ['num_takers']}),
+        ('Number of Times Taken',               {'fields': ['takers']}),
     ]
     inlines = [QuestionInline]
     

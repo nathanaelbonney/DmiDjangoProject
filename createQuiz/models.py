@@ -1,12 +1,14 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
+
 class Quiz(models.Model):
 
     name = models.CharField(max_length=128)
+    author = models.ForeignKey(User, blank = True, null = True, related_name='authorUser')
     pub_date = models.DateTimeField()
-    author = models.CharField(max_length=128)
-    num_takers = models.IntegerField(default=0)
+    takers = models.ManyToManyField(User, blank = True, null = True, related_name='takerUser')
 
     def __unicode__(self):
         return self.name
